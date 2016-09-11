@@ -102,6 +102,9 @@ coverage.xml
 # Rope
 .ropeproject
 
+#Pycharm
+*.idea
+
 # Django stuff:
 *.log
 *.pot
