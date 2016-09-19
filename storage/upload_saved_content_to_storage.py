@@ -12,7 +12,7 @@ from pprint import pprint as p
 from time import time as t
 
 COMMENT_FIELDS = (('author', 'text'), ('author_flair_text', 'text'), ('created_utc', 'timestamp'),
-                  ('score', 'real'), ('id', 'text'), ('subreddit', 'text'), ('subreddit_id', 'text'), ('body', 'text'),
+                  ('score', 'real'), ('comment_id', 'text'), ('subreddit', 'text'), ('subreddit_id', 'text'), ('body', 'text'),
                   ('body_html', 'text'), ('link_author', 'text'), ('link_id', 'text'), ('link_title', 'text'),
                   ('link_url', 'text'), ('parent_id', 'text'))
 
@@ -66,11 +66,13 @@ def filter_praw_objects_to_pmap(praw_object_iterable, praw_object_names_to_filte
     return freeze(name_to_objects_map)
 
 
-def get_tuple_from_dict(dictionary_object, fields_to_get, transform_values_func=None):
+def get_tuple_from_dict(dictionary_object, fields_to_get, key_to_field_map=None, transform_values_func=None):
     row = [None] * len(fields_to_get)
 
     for key, value in dictionary_object.items():
-        if key in fields_to_get and value:
+        if key_to_field_map and key_to_field_map.get(key, None):
+            key = key_to_field_map[key]
+        if value and key in fields_to_get:
             if transform_values_func:
                 value = transform_values_func(key, value)
             row[fields_to_get.index(key)] = value
@@ -94,7 +96,7 @@ def transform_comment_and_submission_values(field_name, value):
 
 def main(reddit_user='sterlej', reddit_password='mypass.'):
     r = RedditUser(user_name=reddit_user, password=reddit_password)
-    gen = r.get_saved_generator(limit=18)
+    gen = r.get_saved_generator(limit=None)
     comment_fields, com_types = zip(*COMMENT_FIELDS)
     submission_fields, sub_types = zip(*SUBMISSION_FIELDS)
 
@@ -108,22 +110,23 @@ def main(reddit_user='sterlej', reddit_password='mypass.'):
     for com in r.saved_comments:
         comment_row = get_tuple_from_dict(dictionary_object=com.__dict__,
                                           fields_to_get=comment_fields,
+                                          key_to_field_map={'id': 'comment_id'},
                                           transform_values_func=transform_comment_and_submission_values)
 
         row_to_save = comment_row + (datetime.now(),)
-        save_row(table_name='comments',
+        save_row(table_name='storage_comment',
                  table_column_names_and_types=COMMENT_FIELDS + (('date_stored', 'timestamp'),),
                  value_list=row_to_save)
 
-    for sub in r.saved_submissions:
-        submission_row = get_tuple_from_dict(dictionary_object=sub.__dict__,
-                                             fields_to_get=submission_fields,
-                                             transform_values_func=transform_comment_and_submission_values)
-
-        row_to_save = submission_row + (datetime.now(),)
-        save_row(table_name='submissions',
-                 table_column_names_and_types=SUBMISSION_FIELDS + (('date_stored', 'timestamp'),),
-                 value_list=row_to_save)
+    # for sub in r.saved_submissions:
+    #     submission_row = get_tuple_from_dict(dictionary_object=sub.__dict__,
+    #                                          fields_to_get=submission_fields,
+    #                                          transform_values_func=transform_comment_and_submission_values)
+    #
+    #     row_to_save = submission_row + (datetime.now(),)
+    #     save_row(table_name='submissions',
+    #              table_column_names_and_types=SUBMISSION_FIELDS + (('date_stored', 'timestamp'),),
+    #              value_list=row_to_save)
 
     psql_storage.db.disconnect()
 

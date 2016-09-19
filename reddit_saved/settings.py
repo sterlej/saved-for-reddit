@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -37,11 +39,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 'haystack',
+    'reddit_saved',
     'storage',
     'search',
 ]
 
-MIDDLEWARE = [
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,7 +72,7 @@ ROOT_URLCONF = 'reddit_saved.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'reddit_saved', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,3 +139,38 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'reddit_saved', 'static'),
+)
+
+# #debug_toolbar settings
+if DEBUG:
+    INTERNAL_IPS = ('127.0.0.1',)
+    MIDDLEWARE_CLASSES += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
+
+    INSTALLED_APPS += (
+        'debug_toolbar',
+    )
+#
+#     DEBUG_TOOLBAR_PANELS = [
+#         'debug_toolbar.panels.versions.VersionsPanel',
+#         'debug_toolbar.panels.timer.TimerPanel',
+#         'debug_toolbar.panels.settings.SettingsPanel',
+#         'debug_toolbar.panels.headers.HeadersPanel',
+#         'debug_toolbar.panels.request.RequestPanel',
+#         'debug_toolbar.panels.sql.SQLPanel',
+#         'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+#         'debug_toolbar.panels.templates.TemplatesPanel',
+#         'debug_toolbar.panels.cache.CachePanel',
+#         'debug_toolbar.panels.signals.SignalsPanel',
+#         'debug_toolbar.panels.logging.LoggingPanel',
+#         'debug_toolbar.panels.redirects.RedirectsPanel',
+#     ]
+#
+    DEBUG_TOOLBAR_CONFIG = {
+        'INTERCEPT_REDIRECTS': False,
+    }
+

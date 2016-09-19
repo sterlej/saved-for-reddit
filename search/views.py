@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from storage.models import Comment
+
 
 # Create your views here.
 """
@@ -20,6 +23,16 @@ Facets:
 """
 
 
-QUERY = {'subreddit': 'netflix best of', 'Date': '2014', 'Title': 'underrated anime', "query 1": 'wolf children'}
-def get_query_results(query):
-    pass
+# QUERY = {'subreddit': 'netflix best of', 'Date': '2014', 'Title': 'underrated anime', "query 1": 'wolf children'}
+# def get_query_results(request):
+#     pass
+
+
+def get_latest_saved(request):
+    all_comments = Comment.objects.all()
+    context = {
+        'comments': all_comments
+    }
+    return render(request, 'display_saved.html', context)
+
+get_latest_saved(None)

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% for comment in comments %}
+		<h2><a href={{comment.link_url}}>{{ comment.link_title }}</a></h2>
+		<p class="comment">{{ comment.body_html|safe}}</p>
+    {% endfor %}
+{% endblock %}
+
+
