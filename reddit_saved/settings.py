@@ -17,7 +17,6 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -29,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,11 +38,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # 'haystack',
     'reddit_saved',
     'storage',
     'search',
+
+    'crispy_forms',
+    'django_extensions',
+    'rest_framework',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ]
+}
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 HAYSTACK_CONNECTIONS = {
     'default': {
@@ -55,7 +64,6 @@ HAYSTACK_CONNECTIONS = {
 }
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
-
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -68,6 +76,7 @@ MIDDLEWARE_CLASSES = [
 ]
 
 ROOT_URLCONF = 'reddit_saved.urls'
+LOGIN_REDIRECT_URL = "/"
 
 TEMPLATES = [
     {
@@ -87,7 +96,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'reddit_saved.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -106,20 +114,19 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    # },
+    # # {
+    # #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    # # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -132,8 +139,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
-
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -154,23 +160,22 @@ if DEBUG:
     INSTALLED_APPS += (
         'debug_toolbar',
     )
-#
-#     DEBUG_TOOLBAR_PANELS = [
-#         'debug_toolbar.panels.versions.VersionsPanel',
-#         'debug_toolbar.panels.timer.TimerPanel',
-#         'debug_toolbar.panels.settings.SettingsPanel',
-#         'debug_toolbar.panels.headers.HeadersPanel',
-#         'debug_toolbar.panels.request.RequestPanel',
-#         'debug_toolbar.panels.sql.SQLPanel',
-#         'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-#         'debug_toolbar.panels.templates.TemplatesPanel',
-#         'debug_toolbar.panels.cache.CachePanel',
-#         'debug_toolbar.panels.signals.SignalsPanel',
-#         'debug_toolbar.panels.logging.LoggingPanel',
-#         'debug_toolbar.panels.redirects.RedirectsPanel',
-#     ]
-#
+    #
+    #     DEBUG_TOOLBAR_PANELS = [
+    #         'debug_toolbar.panels.versions.VersionsPanel',
+    #         'debug_toolbar.panels.timer.TimerPanel',
+    #         'debug_toolbar.panels.settings.SettingsPanel',
+    #         'debug_toolbar.panels.headers.HeadersPanel',
+    #         'debug_toolbar.panels.request.RequestPanel',
+    #         'debug_toolbar.panels.sql.SQLPanel',
+    #         'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    #         'debug_toolbar.panels.templates.TemplatesPanel',
+    #         'debug_toolbar.panels.cache.CachePanel',
+    #         'debug_toolbar.panels.signals.SignalsPanel',
+    #         'debug_toolbar.panels.logging.LoggingPanel',
+    #         'debug_toolbar.panels.redirects.RedirectsPanel',
+    #     ]
+    #
     DEBUG_TOOLBAR_CONFIG = {
         'INTERCEPT_REDIRECTS': False,
     }
-

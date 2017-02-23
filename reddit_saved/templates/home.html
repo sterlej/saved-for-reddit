@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+{# include "search_bar.html" #}
+
+{% if local_id == None %}
+    {% include "registration/authenticate.html" %}
+{% endif %}
+
+{% include "display_saved.html" %}
+
+{% endblock %}
+
+

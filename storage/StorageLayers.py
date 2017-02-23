@@ -31,6 +31,9 @@ class PsqlStorageLayer(StorageLayer):
                                     value_list,
                                     kwargs['table_column_names_and_types'])
 
-    def load_row(self, query, query_args, **kwargs):
+
+class DjangoStorageLayer(StorageLayer):
+
+    def connect(self):
         pass
 

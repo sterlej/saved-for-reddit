@@ -1,9 +1,14 @@
-{% extends "base.html" %}
+{# extends "base.html" #}
 
 {% block content %}
-	{% for comment in comments %}
-		<h2><a href={{comment.link_url}}>{{ comment.link_title }}</a></h2>
-		<p class="comment">{{ comment.body_html|safe}}</p>
+	{% for savable in object_list %}
+        {{ savable.created_utc }}
+		{% if savable.comment %}
+            <!--<h2><a href={{saved.link_url}}>{{ saved.link_title }}</a></h2>-->
+            <p class="comment">{{ savable.comment.body_html|safe}}</p>
+        {% else %}
+            <h3><a href={{saved.permalink}}>{{ savable.submission.permalink }}</a></h3>
+        {% endif %}
     {% endfor %}
 {% endblock %}
 

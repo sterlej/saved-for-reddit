@@ -16,8 +16,9 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
+from django.contrib.auth import login, urls
 
-from search import views
+from storage import views
 
 """
 URLconf.py - simple mapping between URL patterns(regex) to python functions (views)
@@ -39,13 +40,20 @@ How django processes a request
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.get_latest_saved),
+    # url(r'^$', views.main_page),
+    # url(r'^show_saved/$', views.get_current_saved),
+    url(r'^authorize_callback/$', views.authenticated),
+    # url(r'^logout/', views.logout)x
+    url(r'^$', views.home, name="home"),
+    url(r'^', include(urls)),
+    url(r'^api/', include('storage.api.urls', namespace='api')),
+    # url(r'^login/$', views.login, name="login"),
+    # url(r'^register/$', views.register, name="register")
     # url(r'^search/', include('haystack.urls')),
 ]
-
 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls), ),
+        url(r'^__debug__/', include(debug_toolbar.urls)),
     ]

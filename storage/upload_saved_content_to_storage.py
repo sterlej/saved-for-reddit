@@ -4,6 +4,7 @@ from storage.StorageLayers import PsqlStorageLayer
 from datetime import datetime
 import praw
 from collections import defaultdict
+from storage.services import RedditSavedAPI
 
 '''
 temp imports
@@ -17,7 +18,7 @@ COMMENT_FIELDS = (('author', 'text'), ('author_flair_text', 'text'), ('created_u
                   ('link_url', 'text'), ('parent_id', 'text'))
 
 SUBMISSION_FIELDS = (('author', 'text'), ('author_flair_text', 'text'), ('created_utc', 'timestamp'),
-                     ('score', 'real'), ('id', 'text'), ('subreddit', 'text'), ('subreddit_id', 'text'),
+                     ('score', 'real'), ('submission_id', 'text'), ('subreddit', 'text'), ('subreddit_id', 'text'),
                      ('num_comments', 'real'), ('permalink', 'text'), ('title', 'text'),
                      ('url', 'text'), ('post_hint', 'text'))
 
@@ -27,22 +28,18 @@ PRAW_NAME_TO_OBJECT_MAP = {
 }
 
 
-class RedditUser(PClass):
-    user_name = field(str)
-    password = field(str)
-    saved_submissions = pvector_field(praw.objects.Submission, initial=pvector())
-    saved_comments = pvector_field(praw.objects.Comment, initial=pvector())
-
-    @property
-    def reddit_agent(self):
-        return get_reddit_agent(user=self.user_name, password=self.password)
+class RedditUser(object):
+    def __init__(self, reddit_agent):
+        self.reddit_agent = reddit_agent
 
     @property
     def user(self):
         return self.reddit_agent.user
 
-    def get_saved_generator(self, limit=None):
-        return self.user.get_saved(limit=limit)
+    def get_saved_generator(self, limit=None, time=None):
+        if not time:
+            time = 'all'
+        return self.user.get_saved(limit=limit, time=time)
 
 
 def get_reddit_agent(user=None, password=None):
@@ -84,19 +81,29 @@ def get_tuple_from_dict(dictionary_object, fields_to_get, key_to_field_map=None,
 
 
 def transform_comment_and_submission_values(field_name, value):
-    if field_name == 'subreddit':
-        return value.display_name
-    elif field_name == 'author':
-        return value.name
-    elif field_name == 'created_utc':
-        return datetime.utcfromtimestamp(value).isoformat()
+    if value:
+        if field_name == 'subreddit':
+            return value.display_name
+        elif field_name == 'author':
+            return value.name
+        elif field_name == 'created_utc':
+            return datetime.utcfromtimestamp(value).isoformat()
+        else:
+            return value
     else:
         return value
 
 
-def main(reddit_user='sterlej', reddit_password='mypass.'):
-    r = RedditUser(user_name=reddit_user, password=reddit_password)
-    gen = r.get_saved_generator(limit=None)
+def get_user_saved_objects(authorized_reddit_agent, limit=None, time=None):
+    r = RedditUser(reddit_agent=authorized_reddit_agent)
+    gen = r.get_saved_generator(limit=limit, time=time)
+    praw_name_to_objects = thaw(filter_praw_objects_to_pmap(gen, ['Submission', 'Comment']))
+    return praw_name_to_objects
+
+
+def main(reddit_agent):
+    r = RedditUser(reddit_agent)
+    gen = r.get_saved_generator(limit=5)
     comment_fields, com_types = zip(*COMMENT_FIELDS)
     submission_fields, sub_types = zip(*SUBMISSION_FIELDS)
 
@@ -113,23 +120,26 @@ def main(reddit_user='sterlej', reddit_password='mypass.'):
                                           key_to_field_map={'id': 'comment_id'},
                                           transform_values_func=transform_comment_and_submission_values)
 
-        row_to_save = comment_row + (datetime.now(),)
+        row_to_save = comment_row
         save_row(table_name='storage_comment',
-                 table_column_names_and_types=COMMENT_FIELDS + (('date_stored', 'timestamp'),),
+                 table_column_names_and_types=COMMENT_FIELDS,
                  value_list=row_to_save)
 
-    # for sub in r.saved_submissions:
-    #     submission_row = get_tuple_from_dict(dictionary_object=sub.__dict__,
-    #                                          fields_to_get=submission_fields,
-    #                                          transform_values_func=transform_comment_and_submission_values)
-    #
-    #     row_to_save = submission_row + (datetime.now(),)
-    #     save_row(table_name='submissions',
-    #              table_column_names_and_types=SUBMISSION_FIELDS + (('date_stored', 'timestamp'),),
-    #              value_list=row_to_save)
+    for sub in r.saved_submissions:
+        submission_row = get_tuple_from_dict(dictionary_object=sub.__dict__,
+                                             fields_to_get=submission_fields,
+                                             key_to_field_map={'id': 'submission_id'},
+                                             transform_values_func=transform_comment_and_submission_values)
+
+        row_to_save = submission_row
+        save_row(table_name='storage_submission',
+                 table_column_names_and_types=SUBMISSION_FIELDS,
+                 value_list=row_to_save)
 
     psql_storage.db.disconnect()
 
 
 if __name__ == '__main__':
-    main()
+    r = RedditSavedAPI()
+    r.authenticate("16960711-R8qb6OM_NC9ZfxRFgDltZKWPHhM")
+    main(r.reddit_agent)
