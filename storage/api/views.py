@@ -1,6 +1,4 @@
 from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.mixins import DestroyModelMixin
-from rest_framework.renderers import TemplateHTMLRenderer
 from ..models import Savable
 from .serializers import SavableSerializer
 from rest_framework.response import Response
@@ -26,11 +24,6 @@ class BulkDestroyMixin(object):
 
 class SavableListView(BulkDestroyMixin, ListAPIView):
     serializer_class = SavableSerializer
-    # renderer_classes = [TemplateHTMLRenderer]
-    # template_name = 'display_saved.html'
-
-    # def get(self, request, *args, **kwargs):
-    #     return Response({'object_list': self.get_queryset(*args, **kwargs)})
 
     def get_queryset(self, *args, **kwargs):
         profile_ids = self.request.GET.get('ids')

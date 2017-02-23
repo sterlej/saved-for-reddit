@@ -24,7 +24,7 @@ def create_model_row_from_dict(model_object, dictionary_object, id_field):
 
 
 #True service shouldn't have state, self vars in parameters
-class RedditSavedAPI:
+class RedditUserAPI:
 
     def __init__(self):
         self.reddit_agent = praw_functions.get_unauthorized_reddit_agent()

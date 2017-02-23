@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     'reddit_saved',
     'storage',
-    'search',
+    'reddit_accounts',
 
     'crispy_forms',
     'django_extensions',

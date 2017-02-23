@@ -9,14 +9,14 @@ from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 from django.core.urlresolvers import reverse_lazy
 
-from storage.services import RedditSavedAPI, get_subset_of_dict, create_model_row_from_dict
+from storage.services import RedditUserAPI, get_subset_of_dict, create_model_row_from_dict
 from storage.managers import get_model_fields
 from storage.models import Comment
 from storage.models import Submission
 from storage.models import RedditProfile
 from storage.models import Subreddit
 from storage.models import Savable
-from storage.models import LocalIdentity
+from reddit_accounts.models import LocalIdentity
 from storage.upload_saved_content_to_storage import transform_comment_and_submission_values
 
 """
@@ -54,13 +54,12 @@ def logout(request):
     logout(request)
     return redirect('home')
 
-import time
+
 def authenticated(request):
-    t = time.time()
     req = request.GET
     code = req['code']
 
-    reddit_api = RedditSavedAPI()
+    reddit_api = RedditUserAPI()
     refresh_token = reddit_api.get_refresh_token(code)
     reddit_api.authenticate(refresh_token)
     user_dict = reddit_api.get_praw_user(as_dict=True)
@@ -98,7 +97,7 @@ class HomeTemplateView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomeTemplateView, self).get_context_data(**kwargs)
-        reddit_api = RedditSavedAPI()
+        reddit_api = RedditUserAPI()
         auth_url = reddit_api.get_user_authorization_code_url()
         self.request.session['auth_url'] = auth_url  # DONT STORE IN REQUEST!!!!
         context['auth_url'] = auth_url
@@ -114,7 +113,7 @@ class SavedListView(UserDataMixin, ListView):
         new_profile_id = request.session.get('new_profile')
         if new_profile_id:
             new_profile = RedditProfile.objects.get(reddit_user_id=new_profile_id)
-            reddit_api = RedditSavedAPI()
+            reddit_api = RedditUserAPI()
             reddit_api.authenticate(new_profile.refresh_token)
             get_saved_data(new_profile, reddit_api)
             del request.session['new_profile']

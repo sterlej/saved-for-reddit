@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from ..models import Savable, Subreddit, Submission, Comment
-# from django.db.models import Prefetch
 
 
 class SubredditSerializer(serializers.ModelSerializer):

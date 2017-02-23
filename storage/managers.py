@@ -1,7 +1,4 @@
 from django.db.models.query import QuerySet
-from django.db.models import Manager
-
-import itertools
 
 
 class SavableQuerySet(QuerySet):
@@ -18,11 +15,6 @@ class SubredditQuerySet(QuerySet):
 
 SavableManager = SavableQuerySet.as_manager
 SubredditManager = SubredditQuerySet.as_manager
-
-
-class ProfileManager(Manager):
-    def get_all_profiles(self, local_id):
-        return super(ProfileManager, self).get_queryset().filter(identity=local_id)
 
 
 def get_model_fields(model_obj):

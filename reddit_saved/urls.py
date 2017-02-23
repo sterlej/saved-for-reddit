@@ -47,6 +47,7 @@ urlpatterns = [
     url(r'^$', views.home, name="home"),
     url(r'^', include(urls)),
     url(r'^api/', include('storage.api.urls', namespace='api')),
+    url(r'^api2/', include('reddit_accounts.api.urls', namespace='api2')),
     # url(r'^login/$', views.login, name="login"),
     # url(r'^register/$', views.register, name="register")
     # url(r'^search/', include('haystack.urls')),
