@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Reddit Saved</title>
+	<meta charset="utf-8" />
+<!--	{% load staticfiles %}--><!--	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type = "text/css"/>-->
+	<link rel="stylesheet" href="../static/css/bootstrap.css" type = "text/css"/>
+	<link rel="stylesheet" href="../static/css/font-awesome.min.css" type = "text/css"/>
+    <link rel="stylesheet" href="../static/css/simple-sidebar.css" type = "text/css"/>
+
+	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+
+	<style type="text/css">
+		html, body {
+		  height:200%
+		}
+        .navbar {
+            margin-bottom: 0px;
+        }
+        .nav-pills > li > a {
+            padding-left: 0;
+        }
+        
+        @media (min-width: 768px){ #wrapper.toggled-2 #page-content-wrapper {
+            margin-top: 0%;
+            margin-right: 0px;
+            margin-left: -200px;
+            }}
+        #wrapper.toggled-2 #page-content-wrapper {
+            padding: 0;
+        }
+        .container-fluid {
+            padding: 0;
+        }
+        h2.landing-page {
+            padding: 50px 0 10px;
+        }
+        #filter-bar {
+            padding-left: 4%;
+            background-color: #f7f7f7;
+        }
+        #sort-bar {
+            margin: 8px 0px 0px 8%;
+        }
+        hr {
+            margin-top: 5px;
+        }
+        #sorted-by {
+            margin-left: 30%;
+        }
+        .stylish-input-group .input-group-addon{
+            background: white !important; 
+        }
+        .stylish-input-group .form-control{
+            border-right:0; 
+            box-shadow:0 0 0; 
+            border-color:#ccc;
+        }
+        .stylish-input-group button{
+            border:0;
+            background:transparent;
+        }
+        div.stylish-input-group {
+            width: 20%;
+            float: right;
+            margin-top: 3px;
+        }
+        #search-results {
+            padding-left: 0px;
+        }
+        .search-result h3 { font: 500 normal 1.375em "Roboto",Arial,Verdana,sans-serif; margin-top: 0 !important; margin-bottom: 10px !important; }
+        .search-result h3 > a, .search-result i { color: #248dc1 !important; }
+        .search-result p { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; } 
+        .search-result span.plus { position: absolute; right: 0; top: 0px; }
+        .search-result span.plus a { background-color: #248dc1; padding: 5px 5px 3px 5px; }
+        .search-result span.plus a:hover { background-color: #414141; }
+        .search-result span.plus a i { color: #fff !important; }
+        
+        .search-result .thumbnail { border-radius: 0 !important; }
+        .search-result:first-child { margin-top: 0 !important; }
+        .search-result { margin-top: 20px; }
+        .search-result .col-md-2 { border-right: 1px dotted #ccc; min-height: 140px; }
+        .search-result ul { padding-left: 0 !important; list-style: none;  }
+        .search-result ul li { font: 400 normal .85em "Roboto",Arial,Verdana,sans-serif;  line-height: 30px; }
+        .search-result ul li i { padding-right: 5px; }
+        .search-result .col-md-7 { position: relative; }
+    </style>
+</head>
+
+<body class="body" style="background-color:#ffffff">
+    <nav class="navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href='base.html'>RedditSaved</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="base.html">Home</a></li>
+                <li><a href="">Groups</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage Accounts <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="http://google.com"><input type="checkbox"/>   sterlej</a></li>
+                        <li><a href=""><input type="checkbox"/>   __py_guy</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <a href="" class="navbar-brand pull-right">Sign Out</a>
+        </div>
+    </nav>
+    <!-- End Navigation -->
+
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+                <li class="active">
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-home fa-stack-1x icon-cog"></i></span>Home</a>
+                </li>
+                <li>
+                    <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-th fa-stack-1x icon-cog"></i></span>Groups</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left icon-cog"><i class="fa fa-users fa-stack-1x icon-cog"></i></span> Accounts</a>
+                       <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a href="#"><input type="checkbox"/>   __account</a></li>
+                        <li><a href="#"><input type="checkbox"/>   another_account</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid xyz">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul id="filter-bar" class="nav nav-pills">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Types <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><input type="checkbox"/>   Comments</a></li>
+                                    <li><input type="checkbox"/>   Submissions</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Subreddits <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    {% for subreddit in subreddits %}
+                                        <li><input type="checkbox"/><a>{{ subreddit }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fields <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><input type="checkbox"/>   Title</a></li>
+                                    <li><input type="checkbox"/>   Comment Text</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dates <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><input type="checkbox"/>   sterlej</a></li>
+                                    <li><input type="checkbox"/>   __py_guy</a></li>
+                                </ul>
+                            </li>
+                            <div class="input-group stylish-input-group">
+                                <input type="text" class="form-control"  placeholder="Search" >
+                                <span class="input-group-addon">
+                                    <button type="submit">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>  
+                                </span>
+                            </div>  
+                        </ul>
+                        
+                        <p id="sort-bar">
+                            <span>Filtering by:</span>
+                            <span id="sorted-by">Sorted by:</span>
+                        </p>
+                        <hr/>
+                        
+                        <section id="search-results" class="col-md-12">
+                            {% include "display_saved.html" %}
+                            <!--<article class="search-result submission row">-->
+                                <!--<div class="col-md-3">-->
+                                    <!--<img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum">-->
+                                <!--</div>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<h3>When doing freelance website design, what are some musts when it comes to operating successfully?</h3>-->
+                                    <!--<span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-minus"></i></a></span>-->
+                                <!--</div>-->
+                            <!--</article>-->
+                        </section>
+                        <!--   SAVed   -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    
+    
+<!--
+			   {% block content %}
+			   {% endblock %}
+-->
+<!--<script src="../static/js/"></script>-->
+<script src="http://code.jquery.com/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/sidebar_menu.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+body .navbar {
+    min-height: 20px;   
+    height: 20px; !important
+}
+
+#b {
+    border-top: 2px solid grey;
+}
+
