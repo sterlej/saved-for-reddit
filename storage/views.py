@@ -62,31 +62,26 @@ def authenticated(request):
 
     reddit_api = RedditSavedAPI()
     refresh_token = reddit_api.get_refresh_token(code)
-    print(code)
-    s = time.time()
     reddit_api.authenticate(refresh_token)
-    print(time.time()-s, 44444)
     user_dict = reddit_api.get_praw_user(as_dict=True)
-    print(user_dict)
-    # user_id_dict = get_subset_of_dict(user_dict, ('id', 'name'))
-    #
-    # existing_reddit_profile = RedditProfile.objects.filter(reddit_user_id=user_id_dict['id']).first()
-    # if existing_reddit_profile and not request.session.get('local_id'):
-    #     local_id = existing_reddit_profile.identity_id
-    # elif request.session.get('local_id'):
-    #     local_id = request.session.get('local_id')  # Profile does not exist but local identity exists
-    # else:
-    #     local_id = None  # Profile does not exist and no local id
-    #
-    # if not existing_reddit_profile:
-    #     request.session['new_profile'] = user_id_dict['id']
-    # profile = process_profile(user_id_dict, refresh_token, existing_reddit_profile, local_id)
-    # if not request.session.get('local_id') and profile:
-    #     request.session['local_id'] = profile.identity.id  # Assign a local identity
-    #
-    # request.session['profile_ids'] = list(RedditProfile.objects.get_all_profiles(request.session.get('local_id')).
-    #                                       values_list('id', flat=True))
-    print(time.time()-t,111111111111)
+    user_id_dict = get_subset_of_dict(user_dict, ('id', 'name'))
+
+    existing_reddit_profile = RedditProfile.objects.filter(reddit_user_id=user_id_dict['id']).first()
+    if existing_reddit_profile and not request.session.get('local_id'):
+        local_id = existing_reddit_profile.identity_id
+    elif request.session.get('local_id'):
+        local_id = request.session.get('local_id')  # Profile does not exist but local identity exists
+    else:
+        local_id = None  # Profile does not exist and no local id
+
+    if not existing_reddit_profile:
+        request.session['new_profile'] = user_id_dict['id']
+    profile = process_profile(user_id_dict, refresh_token, existing_reddit_profile, local_id)
+    if not request.session.get('local_id') and profile:
+        request.session['local_id'] = profile.identity.id  # Assign a local identity
+
+    request.session['profile_ids'] = list(RedditProfile.objects.get_all_profiles(request.session.get('local_id')).
+                                          values_list('id', flat=True))
     return redirect("home")
 
 
