@@ -1,15 +1,11 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.views.generic import RedirectView
-from django.contrib.auth import authenticate, login, logout
-from django.views.generic.edit import FormView, ContextMixin
+from django.contrib.auth import logout
+from django.views.generic.edit import ContextMixin
 from django.views.generic import TemplateView, ListView
-from django.db.models import Q
-from django.core.urlresolvers import reverse_lazy
 
-from storage.services import RedditUserAPI, get_subset_of_dict, create_model_row_from_dict
+from utils.RedditAPIs import RedditUserAPI
+from storage.services import  get_subset_of_dict, create_model_row_from_dict
 from storage.managers import get_model_fields
 from storage.models import Comment
 from storage.models import Submission
@@ -18,35 +14,6 @@ from storage.models import Subreddit
 from storage.models import Savable
 from reddit_accounts.models import LocalIdentity
 from storage.upload_saved_content_to_storage import transform_comment_and_submission_values
-
-"""
-What are the different facets in order to run a search.
-
-1) Run a query with subreddit facet (May not be full word, e.g. bestof -> netflixbestof)
-    - subreddit facets should be wilds cards not full text (partial index for PSql on subreddit columns&text columns)
-
-2) Run a query with no facets
-    - FT search on all text columns, number columns(Dep on query), date columns(Dep. on query)
-
-Have a search bar, able to add facets
-
-Facets:
-    - Subreddit - Like query
-    - Date
-    - Title
-    - Comment
-"""
-
-"""
-Views:
-
-
-"""
-
-# QUERY = {'subreddit': 'netflix best of', 'Date': '2014', 'Title': 'underrated anime', "query 1": 'wolf children'}
-CLIENT_ID = "SYpUYS_j-YgJOQ"
-CLIENT_SECRET = "YY0Ch-i_gxFuSzcY4q5S-VTFT20"
-REDIRECT_URI = "http://localhost:8000/reddit_callback"
 
 
 @login_required()
@@ -191,12 +158,3 @@ def get_saved_data(reddit_profile, reddit_saved_api):
 
         submission_obj = create_model_row_from_dict(Submission, submission_model_dict, 'submission_id')
         submission_obj.saved_by.add(reddit_profile)
-
-        # saved = list(sorted(chain(ordered_user_submissions, ordered_user_comments),
-        #                     key=attrgetter('created_utc')))
-        # context = {
-        #     'comments': '',
-        #     'submissions': '',
-        #     'saved': saved
-        # }
-        # return render(request, 'display_saved.html', context)

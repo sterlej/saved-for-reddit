@@ -4,7 +4,6 @@ from storage.StorageLayers import PsqlStorageLayer
 from datetime import datetime
 import praw
 from collections import defaultdict
-from storage.services import RedditUserAPI
 
 '''
 temp imports
@@ -139,7 +138,7 @@ def main(reddit_agent):
     psql_storage.db.disconnect()
 
 
-if __name__ == '__main__':
-    r = RedditUserAPI()
-    r.authenticate("16960711-R8qb6OM_NC9ZfxRFgDltZKWPHhM")
-    main(r.reddit_agent)
+# if __name__ == '__main__':
+#     r = RedditUserAPI()
+#     r.authenticate("16960711-R8qb6OM_NC9ZfxRFgDltZKWPHhM")
+#     main(r.reddit_agent)
