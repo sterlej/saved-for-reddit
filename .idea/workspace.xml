@@ -4,36 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebff1e69-2c38-4d0e-88f1-054f7033a4ac" name="Default" comment="kkkkkkkklkkkkkkkkkkkkkkk">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reddit_saved/templates/home.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reddit_saved/templates/registration/authenticate.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reddit_saved/templates/registration/loggedin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reddit_saved/templates/registration/register.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reddit_saved/templates/registration/registration.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reddit_saved/templates/search_bar.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/forms.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/managers.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/services.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/utils.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/reddit_saved/static/normalize.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/reddit_saved/static/style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/search/migrations/__init__.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reddit_saved/__init__.py" afterPath="$PROJECT_DIR$/reddit_saved/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reddit_saved/settings.py" afterPath="$PROJECT_DIR$/reddit_saved/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reddit_saved/templates/base.html" afterPath="$PROJECT_DIR$/reddit_saved/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reddit_saved/templates/display_saved.html" afterPath="$PROJECT_DIR$/reddit_saved/templates/display_saved.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reddit_saved/urls.py" afterPath="$PROJECT_DIR$/reddit_saved/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search/models.py" afterPath="$PROJECT_DIR$/search/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search/views.py" afterPath="$PROJECT_DIR$/search/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/StorageLayers.py" afterPath="$PROJECT_DIR$/storage/StorageLayers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/__init__.py" afterPath="$PROJECT_DIR$/storage/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/apps.py" afterPath="$PROJECT_DIR$/storage/apps.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/storage/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/models.py" afterPath="$PROJECT_DIR$/storage/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/upload_saved_content_to_storage.py" afterPath="$PROJECT_DIR$/storage/upload_saved_content_to_storage.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/views.py" afterPath="$PROJECT_DIR$/storage/views.py" />
-    </list>
+    <list default="true" id="ebff1e69-2c38-4d0e-88f1-054f7033a4ac" name="Default" comment="kkkkkkkklkkkkkkkkkkkkkkk" />
     <ignored path="reddit_saved.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,7 +28,7 @@
           <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/reddit_saved/urls.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="645">
+                <state relative-caret-position="720">
                   <caret line="48" column="34" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
                   <folding>
                     <element signature="e#646#687#0" expanded="true" />
@@ -69,8 +40,8 @@
           <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/storage/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1366">
-                  <caret line="154" column="20" selection-start-line="154" selection-start-column="20" selection-end-line="154" selection-end-column="20" />
+                <state relative-caret-position="494">
+                  <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#57#0" expanded="true" />
                   </folding>
@@ -91,7 +62,7 @@
           <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/storage/api/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
+                <state relative-caret-position="600">
                   <caret line="40" column="19" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
                   <folding>
                     <element signature="e#0#77#0" expanded="true" />
@@ -113,7 +84,7 @@
           <file leaf-file-name="serializers.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/storage/api/serializers.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="195">
+                <state relative-caret-position="210">
                   <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
                   <folding>
                     <element signature="e#0#38#0" expanded="true" />
@@ -125,7 +96,7 @@
           <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/storage/api/urls.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="105">
+                <state relative-caret-position="120">
                   <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
                   <folding>
                     <element signature="e#0#32#0" expanded="true" />
@@ -141,7 +112,7 @@
           <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/storage/models.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="660">
+                <state relative-caret-position="675">
                   <caret line="45" column="30" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
                   <folding>
                     <element signature="e#0#28#0" expanded="true" />
@@ -163,7 +134,7 @@
           <file leaf-file-name="managers.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/storage/managers.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="225">
+                <state relative-caret-position="270">
                   <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
                   <folding>
                     <element signature="e#0#43#0" expanded="true" />
@@ -185,7 +156,7 @@
           <file leaf-file-name="praw_functions.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/reddit_saved/praw_functions.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="480">
+                <state relative-caret-position="510">
                   <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
                   <folding>
                     <element signature="e#0#11#0" expanded="true" />
@@ -570,7 +541,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1055" extended-state="0" />
+    <frame x="0" y="0" width="1920" height="1055" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12249208" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -841,7 +812,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/reddit_saved/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
+        <state relative-caret-position="720">
           <caret line="48" column="34" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
           <folding>
             <element signature="e#646#687#0" expanded="true" />
@@ -860,7 +831,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -868,7 +838,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1500">
           <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -881,7 +850,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/storage/api/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
+        <state relative-caret-position="120">
           <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
@@ -891,7 +860,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/storage/managers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
+        <state relative-caret-position="270">
           <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
@@ -901,7 +870,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/reddit_saved/praw_functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
+        <state relative-caret-position="510">
           <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -925,7 +894,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/storage/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
+        <state relative-caret-position="675">
           <caret line="45" column="30" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
@@ -935,7 +904,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/storage/api/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
+        <state relative-caret-position="210">
           <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
@@ -969,7 +938,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/storage/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
+        <state relative-caret-position="600">
           <caret line="40" column="19" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
           <folding>
             <element signature="e#0#77#0" expanded="true" />
@@ -987,8 +956,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/storage/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1366">
-          <caret line="154" column="20" selection-start-line="154" selection-start-column="20" selection-end-line="154" selection-end-column="20" />
+        <state relative-caret-position="494">
+          <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
           </folding>
