@@ -116,7 +116,6 @@ class SavedListView(UserDataMixin, ListView):
     model = Savable
 
     def get(self, request, *args, **kwargs):
-        t = time.time()
         new_profile_id = request.session.get('new_profile')
         if new_profile_id:
             new_profile = RedditProfile.objects.get(reddit_user_id=new_profile_id)
@@ -124,15 +123,11 @@ class SavedListView(UserDataMixin, ListView):
             reddit_api.authenticate(new_profile.refresh_token)
             get_saved_data(new_profile, reddit_api)
             del request.session['new_profile']
-        print(time.time()-t, 222)
         return super(SavedListView, self).get(request, *args, **kwargs)
 
     def get_queryset(self):
-        t = time.time()
         profile_ids = self.request.session.get('profile_ids')
         saved = Savable.objects.all_user_savables(profile_ids)
-        print(profile_ids)
-        print(time.time()-t,333333333)
         return saved
 
 
