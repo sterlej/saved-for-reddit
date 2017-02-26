@@ -27,7 +27,8 @@ def authenticated(request):
     code = req['code']
 
     reddit_api = RedditUserAPI()
-    refresh_token = reddit_api.get_refresh_token(code)
+    refresh_token = reddit_api.get_access_information(code)
+    refresh_token = refresh_token['refresh_token']
     reddit_api.authenticate(refresh_token)
     user_dict = reddit_api.get_praw_user(as_dict=True)
     user_id_dict = get_subset_of_dict(user_dict, ('id', 'name'))
@@ -69,6 +70,8 @@ class HomeTemplateView(TemplateView):
         self.request.session['auth_url'] = auth_url  # DONT STORE IN REQUEST!!!!
         context['auth_url'] = auth_url
         context['local_id'] = self.request.session.get('local_id')
+        print(context)
+        print(self.request.session.__dict__)
         return context
 
 

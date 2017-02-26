@@ -2,6 +2,15 @@ import praw
 from uuid import uuid4
 from collections import defaultdict
 
+'''
+curl -X POST -d "client_id=lP2YlMfGhIg1GGa8fCOJwz1I8HUMW053cZVLRhfM&client_secret=x36dLJZZnb4ipIZ1kacQ4hy8tV0sN3lW1EQ3ynRhbASyD8PGDyn9iXawZ2qx3PIT1OL0fcK8LmTOkllwOfm3Zme4peK0XpKlZxFRQiTUgSKVWkmk6FAhdaEVq96IG2xA&grant_type=password&username=joe&password=a" http://localhost:8000/auth/token
+
+"refresh_token":"aZtPH2rAWeP2FlVPscfIm0mRgVz29z"
+
+"access_token":"qe5CAnAvoB2xEfsP4GlYJrV6G8gy0L"
+
+curl -X POST -d 'grant_type=password&username=__py_guy&password=mypass.' --user 'lP2YlMfGhIg1GGa8fCOJwz1I8HUMW053cZVLRhfM:x36dLJZZnb4ipIZ1kacQ4hy8tV0sN3lW1EQ3ynRhbASyD8PGDyn9iXawZ2qx3PIT1OL0fcK8LmTOkllwOfm3Zme4peK0XpKlZxFRQiTUgSKVWkmk6FAhdaEVq96IG2xA' https://www.reddit.com/api/v1/access_token
+'''
 
 CLIENT_ID = "SYpUYS_j-YgJOQ"
 CLIENT_SECRET = "YY0Ch-i_gxFuSzcY4q5S-VTFT20"
@@ -60,6 +69,9 @@ class RedditUserAPI:
 
     def get_refresh_token(self, authorization_code):
         return self.reddit_agent.get_access_information(authorization_code)['refresh_token']
+
+    def get_access_information(self, authorization_code):
+        return self.reddit_agent.get_access_information(authorization_code)
 
     def authenticate(self, refresh_token):
         self.reddit_agent.refresh_access_information(refresh_token)

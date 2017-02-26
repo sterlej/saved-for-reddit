@@ -11,8 +11,9 @@ urlpatterns = [
     url(r'^authorize_callback/$', views.authenticated),
     url(r'^$', views.home, name="home"),
     url(r'^', include(urls)),
-    url(r'^api/', include('storage.api.urls', namespace='api')),
-    url(r'^api2/', include('reddit_accounts.api.urls', namespace='api2')),
+    url(r'^api/saved/', include('storage.api.urls', namespace='api-saved')),
+    url(r'^api/accounts/', include('reddit_accounts.api.urls', namespace='api-accounts')),
+    url(r'^auth/', include('rest_framework_social_oauth2.urls')),
     # url(r'^search/', include('haystack.urls')),
 ]
 

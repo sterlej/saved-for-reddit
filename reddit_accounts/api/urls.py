@@ -9,4 +9,8 @@ urlpatterns = [
     url(r'^authenticate/$',
         views.RedditProfileListView.as_view(),
         name='authenticate'),
+
+    url(r'^register/$',
+        views.RedditProfileCreateView.as_view(),
+        name='register'),
 ]

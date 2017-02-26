@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -45,12 +44,19 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_extensions',
     'rest_framework',
+    'oauth2_provider',
+    'social_django',
+    'rest_framework_social_oauth2',
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.ext.rest_framework.OAuth2Authentication',
+        'rest_framework_social_oauth2.authentication.SocialAuthentication',
+),
 }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -78,6 +84,7 @@ MIDDLEWARE_CLASSES = [
 ROOT_URLCONF = 'reddit_saved.urls'
 LOGIN_REDIRECT_URL = "/"
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -89,6 +96,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -110,23 +119,17 @@ DATABASES = {
     }
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
+AUTHENTICATION_BACKENDS = (
+   'rest_framework_social_oauth2.backends.DjangoOAuth2',
+   'social_core.backends.reddit.RedditOAuth2',
+   'django.contrib.auth.backends.ModelBackend',
+)
 
-AUTH_PASSWORD_VALIDATORS = [
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    # },
-    # # {
-    # #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    # # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    # },
-]
+
+SOCIAL_AUTH_REDDIT_KEY = "SYpUYS_j-YgJOQ"
+SOCIAL_AUTH_REDDIT_SECRET = "YY0Ch-i_gxFuSzcY4q5S-VTFT20"
+SOCIAL_AUTH_REDDIT_AUTH_EXTRA_ARGUMENTS = {'duration': 'permanent'}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
