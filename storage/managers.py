@@ -3,31 +3,24 @@ from django.db.models.query import QuerySet
 
 class SavableQuerySet(QuerySet):
 
+    def user_unsaved(self, profile_ids):
+        return self.filter(saved_by__in=profile_ids).distinct().filter(is_saved=False)
+
     def all_user_savables(self, profile_ids):
-        return self.filter(saved_by__in=profile_ids).distinct().prefetch_related('submission', 'comment', 'subreddit')
+        return self.filter(saved_by__in=profile_ids).distinct().filter(is_saved=True).prefetch_related('submission',
+                                                                                                       'comment',
+                                                                                                       'subreddit',
+                                                                                                       'saved_by')
+
+    def all_prefetch(self):
+        return self.all().prefetch_related('submission', 'comment', 'subreddit', 'saved_by')
 
 
 class SubredditQuerySet(QuerySet):
 
     def savable_subreddits(self, savables):
-        return self.filter(subreddit_id__in=savables.values_list('subreddit_id')).distinct()
+        return self.filter(subreddit_id__in=savables.values_list('id')).distinct()
 
 
 SavableManager = SavableQuerySet.as_manager
 SubredditManager = SubredditQuerySet.as_manager
-
-
-def get_model_fields(model_obj):
-    return set(field.name for field in model_obj._meta.get_fields())
-
-
-# def get_all_comments(reddit_profile_obj_seq):
-#     all_comments = [prof.comment_set.all() for prof in reddit_profile_obj_seq]
-#     distinct_comments = itertools.chain(*all_comments).distinct()
-#     return distinct_comments
-#
-#
-# def get_all_submissions(reddit_profile_obj_seq):
-#     all_submissions = [prof.submission_set.all() for prof in reddit_profile_obj_seq]
-#     distinct_submissions = itertools.chain(*all_submissions).distinct()
-#     return distinct_submissions

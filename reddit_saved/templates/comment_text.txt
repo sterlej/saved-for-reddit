@@ -1,0 +1,2 @@
+{{ object.link_title }}
+{{ object.body }}

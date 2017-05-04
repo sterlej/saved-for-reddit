@@ -1,0 +1,1 @@
+{"status":"error","publicPath":"http://localhost:3000/static/","error":"ModuleNotFoundError","message":"Module not found: Error: Can't resolve 'webpack-dev-server/client?http://localhost:3000' in '/home/joe/PycharmProjects/reddit_saved'"}

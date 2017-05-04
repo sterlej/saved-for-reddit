@@ -1,20 +1,20 @@
 from django.db import models
 from .managers import ProfileManager
+from social_django.models import UserSocialAuth
+from django.contrib.auth.models import User
 
 
 class LocalIdentity(models.Model):
     id = models.AutoField(primary_key=True)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
 class RedditProfile(models.Model):
     identity = models.ForeignKey(LocalIdentity, null=True) # author_id (PRAW) => user_id
-    reddit_user_id = models.TextField(db_index=True, unique=True, null=True)
-    username = models.TextField(unique=True, null=True) # user_name => author
-    refresh_token = models.CharField(max_length=200, null=True)
-    active = models.BooleanField(default=True)
+    user_social = models.OneToOneField(UserSocialAuth, null=True)
+    user = models.OneToOneField(User, null=True)
 
     objects = ProfileManager()
 
@@ -23,4 +23,4 @@ class RedditProfile(models.Model):
         self.save()
 
     def __str__(self):
-        return self.username
+        return self.user_social.__str__()

@@ -3,10 +3,11 @@ from django.shortcuts import redirect
 from django.contrib.auth import logout
 from django.views.generic.edit import ContextMixin
 from django.views.generic import TemplateView, ListView
+from uuid import uuid4
 
 from utils.RedditAPIs import RedditUserAPI
 from storage.services import  get_subset_of_dict, create_model_row_from_dict
-from storage.managers import get_model_fields
+from utils.django_functions import get_model_fields
 from storage.models import Comment
 from storage.models import Submission
 from storage.models import RedditProfile
@@ -40,7 +41,7 @@ def authenticated(request):
         local_id = request.session.get('local_id')  # Profile does not exist but local identity exists
     else:
         local_id = None  # Profile does not exist and no local id
-
+    print(local_id, 444444444)
     if not existing_reddit_profile:
         request.session['new_profile'] = user_id_dict['id']
     profile = process_profile(user_id_dict, refresh_token, existing_reddit_profile, local_id)
@@ -65,13 +66,6 @@ class HomeTemplateView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomeTemplateView, self).get_context_data(**kwargs)
-        reddit_api = RedditUserAPI()
-        auth_url = reddit_api.get_user_authorization_code_url()
-        self.request.session['auth_url'] = auth_url  # DONT STORE IN REQUEST!!!!
-        context['auth_url'] = auth_url
-        context['local_id'] = self.request.session.get('local_id')
-        print(context)
-        print(self.request.session.__dict__)
         return context
 
 
@@ -97,8 +91,10 @@ class SavedListView(UserDataMixin, ListView):
 
 def home(request):
     if not request.session.get('local_id'):
+        print(1111111111)
         return HomeTemplateView.as_view()(request)
     else:
+        print(22222222)
         return SavedListView.as_view()(request)
 
 

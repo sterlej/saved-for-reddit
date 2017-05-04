@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^', include(urls)),
     url(r'^api/saved/', include('storage.api.urls', namespace='api-saved')),
     url(r'^api/accounts/', include('reddit_accounts.api.urls', namespace='api-accounts')),
-    url(r'^auth/', include('rest_framework_social_oauth2.urls')),
+    url(r'^api/auth/', include('rest_framework_social_oauth2.urls')),
     # url(r'^search/', include('haystack.urls')),
 ]
 
