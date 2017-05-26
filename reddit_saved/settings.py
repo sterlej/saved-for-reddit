@@ -111,7 +111,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SOCIAL_AUTH_REDDIT_KEY = "SYpUYS_j-YgJOQ"
-SOCIAL_AUTH_REDDIT_SECRET = "YY0Ch-i_gxFuSzcY4q5S-VTFT20"
+with open(os.path.join(SETTINGS_PATH, 'reddit_saved', 'secret.txt')) as f:
+    SOCIAL_AUTH_REDDIT_SECRET = f.readline()
 SOCIAL_AUTH_REDDIT_AUTH_EXTRA_ARGUMENTS = {'duration': 'permanent'}
 
 BROKER_URL = 'redis://localhost:6379/0'
