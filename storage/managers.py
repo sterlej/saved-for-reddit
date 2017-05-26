@@ -11,7 +11,6 @@ class SavableQuerySet(QuerySet):
                                                                                                        'comment',
                                                                                                        'subreddit',
                                                                                                        'saved_by')
-
     def all_prefetch(self):
         return self.all().prefetch_related('submission', 'comment', 'subreddit', 'saved_by')
 

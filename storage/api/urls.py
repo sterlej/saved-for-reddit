@@ -8,6 +8,10 @@ urlpatterns = [
         views.SavableListView.as_view(),
         name='saved_list'),
 
+    url(r'^subreddits$',
+        views.SubredditListView.as_view(),
+        name='subreddits'),
+
     url(r'^comments/create$',
         views.CommentCreateView.as_view(),
         name='comments_create'),
@@ -22,7 +26,5 @@ urlpatterns = [
 
     url(r'^search',
         views.SavableSearchView.as_view(),
-        name='search-savable')
-
-
+        name='search-savable'),
 ]

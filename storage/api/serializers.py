@@ -13,12 +13,6 @@ class SubredditSerializer(serializers.ModelSerializer):
         fields = ('name', 'id')
 
 
-# class SubredditSearchSerializer(HaystackSerializer):
-#     class Meta:
-#         index_classes = [SubredditIndex]
-#         fields = ["name"]
-
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -89,5 +83,5 @@ class SavableSearchSerializer(HaystackSerializer):
 
     class Meta:
         index_classes = [CommentIndex, SubmissionIndex]
-        fields = ['body', 'link_title', 'savable_ptr_id', 'title']
+        fields = ['body', 'link_title', 'savable_ptr_id', 'title', 'subreddit_id']
 

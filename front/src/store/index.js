@@ -1,5 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import { sort, saved, user} from './reducers'
+import { sort, saved, user, filters, search} from './reducers'
 import { fetchSaved } from '../actions'
 import stateData from '../../data/initialState.json'
 import {createLogger} from 'redux-logger'
@@ -16,7 +16,7 @@ const saver = store => next => action => {
 
 const storeFactory = (initialState={stateData}) =>
     applyMiddleware(thunk, loggerMiddleware)(createStore)(
-        combineReducers({sort, saved, user}), stateData)
+        combineReducers({filters, sort, saved, user, search}), stateData)
     //     (!localStorage['redux-store']) ?
     //         JSON.parse(localStorage['redux-store']) :
     //         stateData
