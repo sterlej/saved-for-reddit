@@ -104,7 +104,8 @@ coverage.xml
 
 #Pycharm
 *.idea
-.idea/*
+*.idea/*
+.idea/workspace.xml
 # Django stuff:
 *.log
 *.pot

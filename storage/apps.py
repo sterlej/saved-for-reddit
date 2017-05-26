@@ -1,13 +1,5 @@
 from django.apps import AppConfig
 
 
-class StorageConfig(AppConfig):
+class ProfileConfig(AppConfig): # Our app config class
     name = 'storage'
-
-
-class ProfileConfig(AppConfig):
-    name = "storage"
-    verbose_name = 'User Profiles'
-
-    def ready(self):
-        from . import signals
