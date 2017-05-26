@@ -25,26 +25,31 @@ export const Search = connect(
 )(SearchBar)
 
 
+const mapStateToProps = (state, ownProps) => {
+    self.ownProps = {filters: state.filters}
+    return {
+        filters: [...state.filters],
+        search_value: state.search
+    }}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onFilter(search_value, selectedValues, filter_name) {
+            dispatch(toggleSelected(selectedValues, filter_name))
+            dispatch(searchSaved(search_value, selectedValues.map(s=>s.id)))
+        },
+        onRemove(search_value, selectedValue, filter_name) {
+            var newValues = self.ownProps.filters.filter(s => s.name = 'subreddit')[0]
+                                                 .selectedValues.filter(v => v.id != selectedValue.id)
+
+            dispatch(toggleSelected(newValues, filter_name))
+            dispatch(searchSaved(search_value, newValues.map(v=>v.id)))
+        }
+    }}
+
 export const Filters = connect(
-    state => {
-        return ({
-                filters: [...state.filters],
-                search_value: state.search
-             })
-    },
-
-    dispatch =>  ({
-            onFilter(search_value, selectedValues, filter_name) {
-                dispatch(toggleSelected(selectedValues, filter_name))
-                dispatch(searchSaved(search_value, selectedValues.map(s=>s.id)))
-            },
-
-            onRemove(search_value, selectedValue, filter_name) {
-                dispatch(removeSelected(selectedValue, filter_name))
-                dispatch(searchSaved(search_value, [selectedValue.id]))
-            },
-
-        }),
+    mapStateToProps,
+    mapDispatchToProps
 )(FilterBar)
 
 

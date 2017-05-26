@@ -25,7 +25,7 @@ class MultiSelectFilter extends React.Component {
 
             	renderValue = { (item) => {
 	                return <div className = "removable-value">
-		                       <span style={{paddingLeft: 5}} onChange={() => onRemove(
+		                       <span style={{paddingLeft: 5}} onClick={() => onRemove(
 									                       							search_value,
 									                       							item,
 									                       							name

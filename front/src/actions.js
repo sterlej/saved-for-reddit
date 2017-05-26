@@ -105,8 +105,7 @@ export const toggleSelected = (selectedValues, filter_name) =>
      })
 
 
-export const removeSelected = (selectedValue, filter_name, vals) => 
-     {
+export const removeSelected = (selectedValue, filter_name, vals) => {
      return {
         type: C.REMOVE_SELECTED,
         selectedValue,
